@@ -1,5 +1,3 @@
-// Written by Julie Duan, Feb 2021
-
 #ifndef LIST_H
 #define LIST_H
 

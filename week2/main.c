@@ -1,11 +1,9 @@
-// useIntList.c - testing IntList data type
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
 
-#include "IntList.h"
+#include "List.h"
 
 int main(int argc, char *argv[])
 {
