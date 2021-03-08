@@ -11,6 +11,8 @@
 #include "BSTree.h"
 #include "Queue.h"
 
+#define NOT_HEIGHT_BALANCED -99
+
 typedef struct BSTNode *BSTLink;
 
 typedef struct BSTNode {
@@ -89,57 +91,29 @@ bool BSTreeFind(BSTree t, int v)
 
 // ***********************TUT*************************************************
 
-int BSTreeNumNodes(BSTree t) {
-	return 0;
+static int max(int a, int b){
+	return a > b ? a : b;
 }
 
-int BSTreeCountOdds(BSTree t) { 
-	return 0;
-}
-
-int BSTreeHeight(BSTree t) {
-	return 0;
-}
-
-int BSTreeCountInternal(BSTree t) {
-	if(t == NULL){
-		return 0;
-	}
-	if(t->left == NULL && t->right == NULL){
-		return 0;
-	}
-	int num_left_internal_nodes = BSTreeCountInternal(t->left);
-	int num_right_internal_nodes = BSTreeCountInternal(t->right);
-	return 1 + num_left_internal_nodes + num_right_internal_nodes;
-
-}
-
-int BSTreeNodeDepth(BSTree t, int key) {
-	if(t == NULL){
+int isHeightBalanced(BSTree t) { 
+	if(t == NULL) {
 		return -1;
 	}
-	if(t->value == key){
-		return 0;
+	
+	// check whether left subtree is balanced
+	// check whether right sub tree is balanced
+	int l = isHeightBalanced(t->left);
+	int r = isHeightBalanced(t->right);
+	if(l == NOT_HEIGHT_BALANCED || r == NOT_HEIGHT_BALANCED){
+		return NOT_HEIGHT_BALANCED;
 	}
-	if(key < t->value){
-		// go to left
-		int d = BSTreeNodeDepth(t->left, key);
-		if(d == -1){
-			return -1;
-		}
-		return 1 + d;
-	}else{
-		// go to right
-		int d = BSTreeNodeDepth(t->right, key);
-		if(d == -1){
-			return -1;
-		}
-		return 1 + d;
-	}
-}
 
-int BSTreeCountGreater(BSTree t, int val) {
-	return 0;
+	// check abs(height(left) - height(right)) ≤ 1
+	if(l - r > 1 || l - r < -1){
+		return NOT_HEIGHT_BALANCED;
+	}
+
+    return 1 + max(l,r);
 }
 
 // ***********************TUT*************************************************
@@ -192,9 +166,8 @@ void BSTreePostfix(BSTree t)
 // Prints the values in the given BSTree in level-order
 // Time complexity(...)
 void BSTreeLevelOrder(BSTree t)
-
 {
-
+	return; // TODO
 }
 
 ////////////////////////////////////////////////////////////////////////
